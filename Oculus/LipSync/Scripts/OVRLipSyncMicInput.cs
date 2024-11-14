@@ -27,6 +27,10 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System.Threading;
 
+#if !UNITY_WEBGL
+
+
+
 [RequireComponent(typeof(AudioSource))]
 
 public class OVRLipSyncMicInput : MonoBehaviour
@@ -370,3 +374,4 @@ public class OVRLipSyncMicInput : MonoBehaviour
         return 0.0f;
     }
 }
+#endif
