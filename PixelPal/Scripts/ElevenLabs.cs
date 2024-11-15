@@ -1,14 +1,39 @@
+using System.IO;
 using UnityEngine;
-
-using System.Collections;
-using UnityEngine.Networking;
-using System;
 
 public class ElevenLabs : MonoBehaviour
 {
-    public ElevenLabsConfig config;
-    public AudioSource audioSource;
-    public string text;
+    public string apiKey;
+    public string voiceId;
+    public string ttsUrl;
+
+    private string configFilePath;
+
+    private void Awake()
+    {
+        string homeDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+        configFilePath = Path.Combine(homeDirectory, ".elevenlabs", "auth.json");
+        LoadConfig();
+    }
+
+    private void LoadConfig()
+    {
+        if (File.Exists(configFilePath))
+        {
+            string jsonContent = File.ReadAllText(configFilePath);
+
+            ElevenLabsConfig config = JsonUtility.FromJson<ElevenLabsConfig>(jsonContent);
+
+            apiKey = config.api_key;
+            voiceId = config.voice_id;
+            ttsUrl = config.tts_url;
+
+
+            Debug.Log("ElevenLabs API Key loaded successfully.");
+        }
+        else
+        {
+            Debug.LogError("ElevenLabs auth.json not found" + configFilePath);
+        }
+    }
 }
-
-

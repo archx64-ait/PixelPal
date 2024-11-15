@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ElevenLabsConfig : MonoBehaviour
+public class ElevenLabsConfig
 {
-    public string apiKey = "sk_09db167d614376eb149c03b725727e37c74fcc6f1a7e6461";
-    public string voiceId = "cgSgspJ2msm6clMCkdW9";
-    public string ttsUrl = "https://api.elevenlabs.io/v1/text-to-speech/{0}/stream";
+    public string api_key;
+    public string voice_id;
+    public string tts_url;
 }

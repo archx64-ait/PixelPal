@@ -18,7 +18,7 @@ namespace OpenAI
         [SerializeField] private RectTransform sent;
         [SerializeField] private RectTransform received;
 
-        [SerializeField] private ElevenLabsConfig config;
+        [SerializeField] private ElevenLabs config;
         [SerializeField] private AudioSource audioSource;
 
         private float height;
@@ -30,6 +30,11 @@ namespace OpenAI
         private void Start()
         {
             button.onClick.AddListener(SendReply);
+        }
+
+        public void ExitPixelPal()
+        {
+            Application.Quit();
         }
 
 
@@ -139,6 +144,8 @@ namespace OpenAI
                 StartCoroutine(GenerateAndStreamAudio(message.Content));
                 messages.Add(message);
                 AppendMessage(message);
+
+                //StartCoroutine(HandleGeneratedMessage(message));
             }
             else
             {
@@ -148,5 +155,13 @@ namespace OpenAI
             button.enabled = true;
             inputField.enabled = true;
         }
+
+
+        //public IEnumerator HandleGeneratedMessage(ChatMessage message)
+        //{
+        //    yield return StartCoroutine(GenerateAndStreamAudio(message.Content));
+        //    messages.Add(message);
+        //    AppendMessage(message);
+        //}
     }
 }
